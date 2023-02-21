@@ -44,6 +44,12 @@ clbin_nestkfold <- function(data, tipo = 'elasticnet', kfold = 10, nest_kfold = 
       svm_tr <- caret::train(y ~., data = dbtr, method = "svmLinearWeights", tuneLength = nest_kfold,
                              trControl = trainControl("cv", number = nest_kfold), allowParallel = F, ...)
       return(predict(svm_tr,dbts[,-1])) }
+         
+    if(model == 'knn'){ 
+      set.seed(seme)
+      knn_tr <- caret::train(y ~., data = dbtr, method = "knn", tuneLength = nest_kfold,
+                             trControl = trainControl("cv", number = nest_kfold), ...)
+      return(predict(knn_tr,dbts[,-1])) }
     
     if(model == 'ibc'){ 
       set.seed(seme)
