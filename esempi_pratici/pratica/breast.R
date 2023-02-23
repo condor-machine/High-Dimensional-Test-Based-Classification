@@ -8,6 +8,8 @@
 source('funzioni per classificazioni/class_bin_nested_cv.R')
 library(tidyverse)
 
+# il dataset non √® disponibile in questa repository perch√© √® troppo pesante.
+# √® comunque reperibile su kaggle (https://www.kaggle.com/code/chidimma/eda-of-breast-cancer-gene-expressions/data)
 db <- readr::read_csv('esempi_pratici/data/breast.csv')
 
 
@@ -15,10 +17,10 @@ db <- readr::read_csv('esempi_pratici/data/breast.csv')
 dbb <- db[which(db$type %in% c('luminal_A','luminal_B')),-1]
 
 
-# inizialmente tengo i 5000 geni pi˘ espressi
+# inizialmente tengo i 5000 geni pi√π espressi
 dbb <- data.frame(y=as_factor(dbb[,1]),dbb[,names(sort(colSums(abs(dbb[,-1])),decreasing=T)[1:5e3])])
 
-# ora cerco i geni pi˘ espressi, 
+# ora cerco i geni pi√π espressi, 
 # che verranno poi utilizzati come predittori
 ord_genes <- sort(colSums(dbb[,-1]))
 
@@ -28,7 +30,7 @@ plot(ord_genes)
 abline(h=ord_genes[4400],col='red',lwd=3)
 
 
-# tengo i 600 geni pi˘ espressi
+# tengo i 600 geni pi√π espressi
 df <- data.frame(y=as.factor(dbb[,1]),dbb[,names(sort(colSums(abs(dbb[,-1])),decreasing=T)[1:600])])
 
 # calcolo accuracy  con 10 - fold - CV
@@ -53,11 +55,11 @@ clbin_nestkfold(dbf,'sda') # 0.8983051
 dbb <- db[which(db$type %in% c('basal','HER')),-1]
 # 71 obs (41/30)
 
-# inizialmente tengo i 5000 geni pi˘ espressi
+# inizialmente tengo i 5000 geni pi√π espressi
 dbb <- data.frame(y=as_factor(dbb[,1]),dbb[,names(sort(colSums(abs(dbb[,-1])),decreasing=T)[1:5e3])])
 names(dbb[,1]) <- 'y'
 
-# ora cerco i geni pi˘ espressi, 
+# ora cerco i geni pi√π espressi, 
 # che verranno poi utilizzati come predittori
 ord_genes <- sort(colSums(dbb[,-1]))
 
@@ -67,7 +69,7 @@ plot(ord_genes)
 abline(h=ord_genes[4400],col='red',lwd=3)
 
 
-# tengo i 600 geni pi˘ espressi
+# tengo i 600 geni pi√π espressi
 df <- data.frame(y=as.factor(dbb[,1]),dbb[,names(sort(colSums(abs(dbb[,-1])),decreasing=T)[1:600])])
 
 
