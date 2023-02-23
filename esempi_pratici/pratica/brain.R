@@ -3,31 +3,33 @@ source('funzioni per classificazioni/class_bin_nested_cv.R')
 
 library(tidyverse)
 
+# il dataset non √® presente in questa repository perch√© √® troppo pesante.
+# √® comunque reperibile su kaggle (https://www.kaggle.com/code/khushim10/analysis-of-gene-expression-in-brain-cancer/data)
 db <- readr::read_csv('esempi_pratici/data/brain.csv')
 
 db1 <- droplevels(db[which(db$type %in% c('glioblastoma','medulloblastoma')),-1])
 # 56 obs (34/22)
 
 dd <- data.frame(db1[,1],data.frame(map(db1[,-1],as.numeric)))
-# inizialmente tengo i 5000 geni pi˘ espressi
+# inizialmente tengo i 5000 geni pi√π espressi
 dbb <- cbind(dd[,1],dd[,names(sort(colSums(dd[,-1]),decreasing=T)[1:5e3])])
 
 rm(db1)
 
 
-# ora cerco i geni pi˘ espressi, 
+# ora cerco i geni pi√π espressi, 
 # che verranno poi utilizzati come predittori
 ord_genes <- sort(colSums(dbb[,-1]))
 
 # grafico della somma sui campioni delle reads (per ogni gene)
 # scelgo come numero di geni 600
-# perchË pi˘ o meno Ë ilpunto in cui la curva 
+# perch√® pi√π o meno √® ilpunto in cui la curva 
 # inizia ad esplodere
 plot(ord_genes)
 abline(h=ord_genes[4400],col='red',lwd=3)
 
 
-# tengo i 600 geni pi˘ espressi
+# tengo i 600 geni pi√π espressi
 df <- data.frame(y=as.factor(dbb[,1]),dbb[,names(sort(colSums(abs(dbb[,-1])),decreasing=T)[1:6e2])])
 
 # calcolo accuracy  con 10 - fold - CV
@@ -53,18 +55,18 @@ db1 <- droplevels(db[which(db$type %in% c('ependymoma','pilocytic_astrocytoma'))
 # 61 obs (46/15)
 
 dd <- data.frame(db1[,1],data.frame(map(db1[,-1],as.numeric)))
-# inizialmente tengo i 5000 geni pi˘ espressi
+# inizialmente tengo i 5000 geni pi√π espressi
 dbb <- cbind(dd[,1],dd[,names(sort(colSums(dd[,-1]),decreasing=T)[1:5e3])])
 
 rm(db1)
 
-# ora cerco i geni pi˘ espressi, 
+# ora cerco i geni pi√π espressi, 
 # che verranno poi utilizzati come predittori
 ord_genes <- sort(colSums(dbb[,-1]))
 
 # grafico della somma sui campioni delle reads (per ogni gene)
 # scelgo come numero di geni 600
-# perchË pi˘ o meno Ë ilpunto in cui la curva 
+# perch√® pi√π o meno √® ilpunto in cui la curva 
 # inizia ad esplodere...
 # potrebbe andare ugualmente bene 800 o 1000
 # ma con 600 risparmio un po' di tempo
@@ -72,7 +74,7 @@ plot(ord_genes)
 abline(h=ord_genes[4400],col='red',lwd=3)
 
 
-# tengo i 600 geni pi˘ espressi
+# tengo i 600 geni pi√π espressi
 df <- data.frame(y=as.factor(dbb[,1]),dbb[,names(sort(colSums(abs(dbb[,-1])),decreasing=T)[1:600])])
 
 
@@ -103,17 +105,17 @@ dd <- data.frame(db1[,1],data.frame(map(db1[,-1],as.numeric)))
 
 rm(db1)
 
-# inizialmente tengo i 5000 geni pi˘ espressi
+# inizialmente tengo i 5000 geni pi√π espressi
 dbb <- cbind(dd[,1],dd[,names(sort(colSums(dd[,-1]),decreasing=T)[1:5e3])])
 
 
-# ora cerco i geni pi˘ espressi, 
+# ora cerco i geni pi√π espressi, 
 # che verranno poi utilizzati come predittori
 ord_genes <- sort(colSums(dbb[,-1]))
 
 # grafico della somma sui campioni delle reads (per ogni gene)
 # scelgo come numero di geni 600
-# perchË pi˘ o meno Ë ilpunto in cui la curva 
+# perch√® pi√π o meno √® ilpunto in cui la curva 
 # inizia ad esplodere...
 # potrebbe andare ugualmente bene 800 o 1000
 # ma con 600 risparmio un po' di tempo
@@ -121,7 +123,7 @@ plot(ord_genes)
 abline(h=ord_genes[4400],col='red',lwd=3)
 
 
-# tengo i 600 geni pi˘ espressi
+# tengo i 600 geni pi√π espressi
 df <- data.frame(y=as.factor(dbb[,1]),dbb[,names(sort(colSums(abs(dbb[,-1])),decreasing=T)[1:600])])
 
 # calcolo accuracy  con 10 - fold - CV
